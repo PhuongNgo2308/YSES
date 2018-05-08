@@ -6,15 +6,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // custom extensions
 import { PrivateRoute } from "/src/extensions/PrivateRoute";
 // custom views
-import AppView from "/src/views/App/AppView";
+import AppView from "./views/App/AppView";
 
-import AboutView from "/src/views/App/views/Statics/AboutView";
-import HomeView from "/src/views/App/views/Statics/HomeView";
-import NotFoundView from "/src/views/App/views/Statics/NotFoundView";
+import AboutView from "./views/App/views/Statics/AboutView";
+import HomeView from "./views/App/views/Statics/HomeView";
+import NotFoundView from "./views/App/views/Statics/NotFoundView";
 
-import LoginView from "/src/views/App/views/Login/LoginView";
-import RegisterView from "/src/views/App/views/Register/RegisterView";
-import UserInfoView from "/src/views/App/views/UserInfo/UserInfoView";
+import LoginView from "./views/App/views/Login/LoginView";
+import RegisterView from "./views/App/views/Register/RegisterView";
+import UserInfoView from "./views/App/views/UserInfo/UserInfoView";
 
 render(
   <Router>
