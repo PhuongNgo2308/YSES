@@ -1,0 +1,91 @@
+/* Common */
+* {
+  transition: all 0.8s ease-out;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+p {
+  padding-left: 15px;
+}
+
+input {
+  margin: 10px 15px;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #1abc9c;
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0) 96%,
+    #1abc9c 4%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 96%,
+    #1abc9c 4%
+  );
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  /* color: #0e6252; */
+}
+
+input:focus {
+  box-shadow: none;
+  outline: none;
+  background-position: 0 0;
+}
+
+.is-invalid-input {
+  border-bottom: solid 1px #ec4c4c;
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0) 96%,
+    #ec4c4c 4%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 96%,
+    #ec4c4c 4%
+  );
+}
+
+span.validation-error-msg {
+  display: block;
+  color: #ec4c4c;
+  font-size: smaller;
+  margin: 10px 20px;
+}
+
+/* layout */
+.container-div {
+  float: left;
+  min-width: 70vw;
+  min-height: 80vh;
+  margin-top: 5vh;
+  margin-left: 5vw;
+}
+
+.header-div {
+  float: right;
+  margin-right: 5vw;
+}
+
+.divide-div {
+  clear: both;
+}
+
+.footer-div {
+  float: left;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* AuthButton */
+.signout-btn {
+  margin-left: 10px;
+}

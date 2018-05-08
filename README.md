@@ -1,2 +1,0 @@
-# YSES
-Created with CodeSandbox
