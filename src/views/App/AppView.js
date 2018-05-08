@@ -4,7 +4,7 @@ import Zoom from "react-reveal/Zoom";
 // routing components
 import { Link } from "react-router-dom";
 // custom components
-import { AuthButton } from "/src/views/App/components/Control.AuthButton";
+import { AuthButton } from "/src/views/App/components/AuthButton";
 
 export default class AppView extends React.Component {
   render() {
