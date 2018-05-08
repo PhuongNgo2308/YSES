@@ -6,11 +6,11 @@ import Button from "react-validation/build/button";
 // routing components
 import { Redirect } from "react-router-dom";
 // custom extensions
-import ValidationType from "/src/extensions/ValidationType";
+import ValidationType from "../../../../extensions/ValidationType";
 // custom services
-import { AuthService } from "/src/services/AuthService";
+import { AuthService } from "../../../../services/AuthService";
 // custom layout
-import AnimLayout from "/src/views/App/AnimLayout";
+import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class Login extends Component {
   state = {

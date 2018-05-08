@@ -4,7 +4,7 @@ import { render } from "react-dom";
 // routing components
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // custom extensions
-import { PrivateRoute } from "/src/extensions/PrivateRoute";
+import { PrivateRoute } from "./extensions/PrivateRoute";
 // custom views
 import AppView from "./views/App/AppView";
 

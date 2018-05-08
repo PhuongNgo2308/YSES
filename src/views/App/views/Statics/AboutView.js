@@ -1,5 +1,5 @@
 import React from "react";
-import AnimLayout from "/src/views/App/AnimLayout";
+import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class AboutView extends React.Component {
   render() {

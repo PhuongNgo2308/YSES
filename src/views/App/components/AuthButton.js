@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { AuthService } from "/src/services/AuthService";
+import { AuthService } from "../../../services/AuthService";
 
 export const AuthButton = withRouter(
   ({ history }) =>

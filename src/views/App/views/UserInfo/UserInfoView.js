@@ -1,9 +1,9 @@
 // common components
 import React from "react";
 // data service
-import FbAPI from "/src/data/FirebaseAPI";
+import FbAPI from "../../../../data/FirebaseAPI";
 // custom layout
-import AnimLayout from "/src/views/App/AnimLayout";
+import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class UserInfo extends React.Component {
   render() {

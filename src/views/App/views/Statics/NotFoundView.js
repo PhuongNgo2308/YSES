@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import AnimLayout from "/src/views/App/AnimLayout";
+import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class NotFoundView extends React.Component {
   render() {

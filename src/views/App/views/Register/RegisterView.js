@@ -1,7 +1,7 @@
 // common components
 import React from "react";
 // custom layout
-import AnimLayout from "/src/views/App/AnimLayout";
+import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class RegisterView extends React.Component {
   render() {
