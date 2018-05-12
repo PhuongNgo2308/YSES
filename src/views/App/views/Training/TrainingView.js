@@ -16,8 +16,14 @@ export default class TrainingView extends React.Component {
   }
 
   handleChange = evt => {
+    let currentSelected = this.state.fav;
+
+    if (currentSelected.indexOf(evt.target.value) == -1) {
+      currentSelected = currentSelected.concat(", ").concat(evt.target.value);
+    }
+
     this.setState({
-      fav: evt.target.value
+      fav: currentSelected
     });
   };
 
@@ -36,13 +42,20 @@ export default class TrainingView extends React.Component {
               <label>
                 Select your fav things:
                 <br />
-                <select value={this.state.fav} onChange={this.handleChange}>
+                <select
+                  multiple={true}
+                  value={this.state.fav}
+                  onChange={this.handleChange}
+                >
                   <option value="game">Games</option>
                   <option value="football">Football</option>
                   <option value="music">Music</option>
                   <option value="programming">Programming</option>
                 </select>
               </label>
+
+              <br />
+
               <input type="submit" value="submit" />
             </p>
           </form>

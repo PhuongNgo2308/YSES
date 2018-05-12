@@ -41,35 +41,34 @@ export default class Login extends Component {
       <AnimLayout>
         <div className="login-div">
           <h2>Login</h2>
-          <p>
-            <Form onSubmit={this.handleSubmit.bind(this)}>
-              <label>
-                Email*
-                <Input
-                  value="123@mail.com"
-                  placeholder="Your email address"
-                  name="email"
-                  validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
-                />
-              </label>
 
-              <label>
-                Password*
-                <Input
-                  value="12312312312"
-                  placeholder="Your password"
-                  type="password"
-                  name="password"
-                  minLength="8"
-                  validations={[ValidationType.REQUIRED, ValidationType.GT]}
-                />
-              </label>
+          <Form onSubmit={this.handleSubmit.bind(this)}>
+            <label>
+              Email*
+              <Input
+                value="123@mail.com"
+                placeholder="Your email address"
+                name="email"
+                validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
+              />
+            </label>
 
-              <div>
-                <Button className="button">Submit</Button>
-              </div>
-            </Form>
-          </p>
+            <label>
+              Password*
+              <Input
+                value="12312312312"
+                placeholder="Your password"
+                type="password"
+                name="password"
+                minLength="8"
+                validations={[ValidationType.REQUIRED, ValidationType.GT]}
+              />
+            </label>
+
+            <div>
+              <Button className="button">Submit</Button>
+            </div>
+          </Form>
         </div>
       </AnimLayout>
     );
