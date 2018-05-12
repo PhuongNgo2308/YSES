@@ -13,6 +13,10 @@ import { AuthService } from "../../../../services/AuthService";
 import AnimLayout from "../../../../views/App/AnimLayout";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     redirectToReferrer: false
   };

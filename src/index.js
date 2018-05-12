@@ -15,6 +15,7 @@ import NotFoundView from "./views/App/views/Statics/NotFoundView";
 import LoginView from "./views/App/views/Login/LoginView";
 import RegisterView from "./views/App/views/Register/RegisterView";
 import UserInfoView from "./views/App/views/UserInfo/UserInfoView";
+import TrainingView from "./views/App/views/Training/TrainingView";
 
 render(
   <Router>
@@ -24,6 +25,7 @@ render(
         <Route path="/register" component={RegisterView} />
         <Route path="/about" component={AboutView} />
         <Route path="/login" component={LoginView} />
+        <Route path="/training" component={TrainingView} />
 
         <PrivateRoute path="/userinfo/:uid" component={UserInfoView} />
 

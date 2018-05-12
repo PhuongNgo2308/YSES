@@ -19,6 +19,9 @@ export default class AppView extends React.Component {
               <Link to="/register">Register</Link>
             </p>
             <p>
+              <Link to="/training">Training</Link>
+            </p>
+            <p>
               <Link to="/about">About</Link>
             </p>
             <p>
