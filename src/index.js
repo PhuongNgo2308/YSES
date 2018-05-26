@@ -16,6 +16,7 @@ import LoginView from "./views/App/views/Login/LoginView";
 import RegisterView from "./views/App/views/Register/RegisterView";
 import UserInfoView from "./views/App/views/UserInfo/UserInfoView";
 import TrainingView from "./views/App/views/Training/TrainingView";
+import MyKeyView from "./views/App/views/MyKey/MyKeyView";
 
 render(
   <Router>
@@ -28,6 +29,7 @@ render(
         <Route path="/training" component={TrainingView} />
 
         <PrivateRoute path="/userinfo/:uid" component={UserInfoView} />
+        <PrivateRoute path="/mykey" component={MyKeyView} />
 
         <Route component={NotFoundView} />
       </Switch>

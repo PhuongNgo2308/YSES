@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+
 import { AuthService } from "../../../services/AuthService";
+import { IconPlus } from "../../../views/App/components/Icons";
 
 export const RegisterLink = withRouter(
   ({ history }) =>
@@ -8,7 +10,10 @@ export const RegisterLink = withRouter(
       ""
     ) : (
       <p>
-        <Link to="/register">Register</Link>
+        <Link to="/register">
+          <IconPlus />
+          Register
+        </Link>
       </p>
     )
 );

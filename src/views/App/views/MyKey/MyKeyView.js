@@ -13,28 +13,30 @@ import ValidationType from "../../../../extensions/ValidationType";
 // custom layout
 import AnimLayout from "../../../../views/App/AnimLayout";
 
-export default class RegisterView extends React.Component {
+//custom components
+import { IconHelp } from "../../../../views/App/components/Icons";
+
+export default class MyKeyView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      userkey: "",
+      enckey: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     // this.handleInput = this.handleInput.bind(this);
   }
 
   handleClick = () => {
-    debugger;
-
-    this.form.validateAll();
+    this.Form.validateAll();
   };
 
   handleSubmit = evt => {
+    Form.validate();
+
     evt.preventDefault();
-    debugger;
+
     const data = new FormData(evt.target);
 
     alert("123");
@@ -44,31 +46,25 @@ export default class RegisterView extends React.Component {
     return (
       <AnimLayout>
         <div className="register-div">
-          <h2>Register</h2>
+          <h2>My Key Settings</h2>
 
-          <Form
-            ref={c => {
-              this.form = c;
-            }}
-            onSubmit={this.handleSubmit}
-          >
+          <Form onSubmit={this.handleSubmit}>
             <label>
-              Email*
+              Your secret key <IconHelp />
               <Input
-                value={this.state.email}
-                placeholder="Your email address"
-                name="email"
-                validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
+                value={this.state.userkey}
+                placeholder="Your private key"
+                name="userkey"
+                validations={[ValidationType.REQUIRED]}
               />
             </label>
 
             <label>
-              Password*
+              Encryption key <IconHelp />
               <Input
-                value={this.state.password}
-                placeholder="Your password"
-                type="password"
-                name="password"
+                value={this.state.enckey}
+                placeholder="Key used for data encryption"
+                name="enckey"
                 minLength="8"
                 validations={[ValidationType.REQUIRED, ValidationType.GT]}
               />
@@ -80,7 +76,7 @@ export default class RegisterView extends React.Component {
                   className="button clicker fast"
                   onClick={this.handleClick}
                 >
-                  Submit
+                  Save
                 </Button>
                 <div class="circle angled second" />
               </div>

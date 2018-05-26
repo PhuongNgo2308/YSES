@@ -30,6 +30,10 @@ a {
   -webkit-transition: -webkit-transform 0.2s;
 }
 
+a div {
+  margin-right: 5px;
+}
+
 a.back {
   color: #c5c5c5;
 }
@@ -87,6 +91,11 @@ a:hover::before {
   border-radius: 100px;
   z-index: 2;
   color: #1f8e04;
+}
+
+.clicker:disabled {
+  color: #c5c5c5;
+  font-weight: 500;
 }
 
 .clicker:active {
