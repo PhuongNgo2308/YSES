@@ -36,28 +36,26 @@ export default class TrainingView extends React.Component {
     return (
       <AnimLayout>
         <div className="Training-div">
+          <h2>Training view</h2>
           <form onSubmit={this.handleSubmit}>
-            <h2>Training view</h2>
-            <p>
-              <label>
-                Select your fav things:
-                <br />
-                <select
-                  multiple={true}
-                  value={this.state.fav}
-                  onChange={this.handleChange}
-                >
-                  <option value="game">Games</option>
-                  <option value="football">Football</option>
-                  <option value="music">Music</option>
-                  <option value="programming">Programming</option>
-                </select>
-              </label>
-
+            <label>
+              Select your fav things:
               <br />
+              <select
+                multiple={true}
+                value={this.state.fav}
+                onChange={this.handleChange}
+              >
+                <option value="game">Games</option>
+                <option value="football">Football</option>
+                <option value="music">Music</option>
+                <option value="programming">Programming</option>
+              </select>
+            </label>
 
-              <input type="submit" value="submit" />
-            </p>
+            <br />
+
+            <input type="submit" value="submit" />
           </form>
         </div>
       </AnimLayout>

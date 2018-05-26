@@ -4,7 +4,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
 // routing components
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 // custom extensions
 import ValidationType from "../../../../extensions/ValidationType";
 // custom services
@@ -66,7 +66,14 @@ export default class Login extends Component {
             </label>
 
             <div>
-              <Button className="button">Submit</Button>
+              <div class="wrap">
+                <Button className="button clicker fast">Submit</Button>
+                <div class="circle angled second" />
+              </div>
+
+              <Link className="back" to="/">
+                Back
+              </Link>
             </div>
           </Form>
         </div>

@@ -4,6 +4,9 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
 
+// routing components
+import { Link } from "react-router-dom";
+
 // custom extensions
 import ValidationType from "../../../../extensions/ValidationType";
 
@@ -60,7 +63,14 @@ export default class RegisterView extends React.Component {
             </label>
 
             <div>
-              <Button className="button">Submit</Button>
+              <div class="wrap">
+                <Button className="button clicker fast">Submit</Button>
+                <div class="circle angled second" />
+              </div>
+
+              <Link className="back" to="/">
+                Cancel
+              </Link>
             </div>
           </Form>
         </div>

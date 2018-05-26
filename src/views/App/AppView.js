@@ -4,7 +4,13 @@ import Zoom from "react-reveal/Zoom";
 // routing components
 import { Link } from "react-router-dom";
 // custom components
-import { AuthButton } from "../../views/App/components/AuthButton";
+import { RegisterLink } from "../../views/App/components/RegisterLink";
+import { AuthLink } from "../../views/App/components/AuthLink";
+import { AboutLink } from "../../views/App/components/AboutLink";
+import { HomeLink } from "../../views/App/components/HomeLink";
+import { ListSecretsLink } from "../../views/App/components/ListSecretsLink";
+import { AddSecretLink } from "../../views/App/components/AddSecretLink";
+import { MyKeyLink } from "../../views/App/components/MyKeyLink";
 
 export default class AppView extends React.Component {
   render() {
@@ -12,21 +18,13 @@ export default class AppView extends React.Component {
       <div className="app-div">
         <Zoom>
           <div className="header-div">
-            <p>
-              <Link to="/">Home</Link>
-            </p>
-            <p>
-              <Link to="/register">Register</Link>
-            </p>
-            <p>
-              <Link to="/training">Training</Link>
-            </p>
-            <p>
-              <Link to="/about">About</Link>
-            </p>
-            <p>
-              <AuthButton />
-            </p>
+            <HomeLink />
+            <RegisterLink />
+            <AboutLink />
+            <ListSecretsLink />
+            <AddSecretLink />
+            <MyKeyLink />
+            <AuthLink />
           </div>
         </Zoom>
 
