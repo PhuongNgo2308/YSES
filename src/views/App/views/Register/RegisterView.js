@@ -55,6 +55,7 @@ export default class RegisterView extends React.Component {
             <label>
               Email*
               <Input
+                autoFocus
                 value={this.state.email}
                 placeholder="Your email address"
                 name="email"

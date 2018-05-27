@@ -3,6 +3,7 @@ import React from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
+import CryptoJS from "crypto-js";
 
 // routing components
 import { Link } from "react-router-dom";
@@ -28,18 +29,30 @@ export default class MyKeyView extends React.Component {
     // this.handleInput = this.handleInput.bind(this);
   }
 
-  handleClick = () => {
-    this.Form.validateAll();
-  };
-
   handleSubmit = evt => {
-    Form.validate();
-
     evt.preventDefault();
 
     const data = new FormData(evt.target);
 
-    alert("123");
+    let userkey = data.get("userkey");
+    let enckey = data.get("enckey");
+
+    // encypt encryption key using user's key
+    let encrypted_enckey = CryptoJS.AES.encrypt(enckey, userkey);
+    //decrypt
+    let bytes = CryptoJS.AES.decrypt(encrypted_enckey.toString(), userkey);
+    let decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+
+    alert(
+      "your key: " +
+        userkey +
+        "\nyour encryption key: " +
+        enckey +
+        "\nyour encrypted enckey: " +
+        encrypted_enckey +
+        "\ndecrypted enckey: " +
+        decryptedData
+    );
   };
 
   render() {
@@ -52,6 +65,7 @@ export default class MyKeyView extends React.Component {
             <label>
               Your secret key <IconHelp />
               <Input
+                autoFocus
                 value={this.state.userkey}
                 placeholder="Your private key"
                 name="userkey"
@@ -72,12 +86,7 @@ export default class MyKeyView extends React.Component {
 
             <div>
               <div class="wrap">
-                <Button
-                  className="button clicker fast"
-                  onClick={this.handleClick}
-                >
-                  Save
-                </Button>
+                <Button className="button clicker fast">Save</Button>
                 <div class="circle angled second" />
               </div>
 

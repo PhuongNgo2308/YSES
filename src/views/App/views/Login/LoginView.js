@@ -46,6 +46,7 @@ export default class Login extends Component {
             <label>
               Email*
               <Input
+                autoFocus
                 value="123@mail.com"
                 placeholder="Your email address"
                 name="email"
