@@ -17,6 +17,14 @@ export default class Home extends React.Component {
           </p>
 
           <p>
+            <img
+              className="img-app-flow"
+              src="https://lh3.google.com/u/0/d/1ToRfaUf8atPUOp3vaeNcmq2jxdxUaueg=w1827-h940-iv1"
+              alt="loading.."
+            />
+          </p>
+
+          <p>
             <b>
               <Link to="/register">Register</Link> to getting started.
             </b>
