@@ -1,5 +1,5 @@
 // common components
-import React from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
@@ -13,7 +13,16 @@ import ValidationType from "../../../../extensions/ValidationType";
 // custom layout
 import AnimLayout from "../../../../views/App/AnimLayout";
 
-export default class RegisterView extends React.Component {
+const RegisterView = () => (
+  <AnimLayout>
+    <div className="register-div">
+      <h2>Register</h2>
+      <RegisterForm />
+    </div>
+  </AnimLayout>
+);
+
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,12 +32,9 @@ export default class RegisterView extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    // this.handleInput = this.handleInput.bind(this);
   }
 
   handleClick = () => {
-    debugger;
-
     this.form.validateAll();
   };
 
@@ -37,62 +43,57 @@ export default class RegisterView extends React.Component {
     debugger;
     const data = new FormData(evt.target);
 
+    debugger;
+
     alert("123");
   };
 
   render() {
     return (
-      <AnimLayout>
-        <div className="register-div">
-          <h2>Register</h2>
+      <Form
+        ref={c => {
+          this.form = c;
+        }}
+        onSubmit={this.handleSubmit}
+      >
+        <label>
+          Email*
+          <Input
+            autoFocus
+            value={this.state.email}
+            placeholder="Your email address"
+            name="email"
+            validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
+          />
+        </label>
 
-          <Form
-            ref={c => {
-              this.form = c;
-            }}
-            onSubmit={this.handleSubmit}
-          >
-            <label>
-              Email*
-              <Input
-                autoFocus
-                value={this.state.email}
-                placeholder="Your email address"
-                name="email"
-                validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
-              />
-            </label>
+        <label>
+          Password*
+          <Input
+            value={this.state.password}
+            placeholder="Your password"
+            type="password"
+            name="password"
+            minLength="8"
+            validations={[ValidationType.REQUIRED, ValidationType.GT]}
+          />
+        </label>
 
-            <label>
-              Password*
-              <Input
-                value={this.state.password}
-                placeholder="Your password"
-                type="password"
-                name="password"
-                minLength="8"
-                validations={[ValidationType.REQUIRED, ValidationType.GT]}
-              />
-            </label>
+        <div>
+          <div class="wrap">
+            <Button className="button clicker fast" onClick={this.handleClick}>
+              Submit
+            </Button>
+            <div class="circle angled second" />
+          </div>
 
-            <div>
-              <div class="wrap">
-                <Button
-                  className="button clicker fast"
-                  onClick={this.handleClick}
-                >
-                  Submit
-                </Button>
-                <div class="circle angled second" />
-              </div>
-
-              <Link className="back" to="/">
-                Cancel
-              </Link>
-            </div>
-          </Form>
+          <Link className="back" to="/">
+            Cancel
+          </Link>
         </div>
-      </AnimLayout>
+      </Form>
     );
   }
 }
+
+export default RegisterView;
