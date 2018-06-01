@@ -1,8 +1,6 @@
 // common components
 import React from "react";
 import Zoom from "react-reveal/Zoom";
-// routing components
-import { Link } from "react-router-dom";
 // custom components
 import { RegisterLink } from "../../views/App/components/RegisterLink";
 import { AuthLink } from "../../views/App/components/AuthLink";
