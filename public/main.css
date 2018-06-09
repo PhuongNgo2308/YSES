@@ -148,11 +148,13 @@ a:hover::before {
 }
 /* input */
 input {
-  margin: 10px 15px;
+  margin-top: 5px;
+  margin-bottom: 25px;
+  margin-left: 5px;
   width: 200px;
   display: block;
   border: none;
-  padding: 10px 0;
+  padding-bottom: 7px;
   border-bottom: solid 1px #1f8e04;
   -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
@@ -193,28 +195,30 @@ span.validation-error-msg {
   display: block;
   color: #ec4c4c;
   font-size: smaller;
-  margin: 10px 20px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  margin-top: -15px;
 }
 /* image */
 img.img-app-flow {
   height: 500px;
 }
 /* layout */
-.container-div {
+.div-container {
   float: left;
   min-width: 65vw;
   min-height: 60vh;
   margin-top: 5vh;
   margin-left: 5vw;
 }
-.header-div {
+.div-header {
   float: right;
   margin-right: 5vw;
 }
-.divide-div {
+.div-divider {
   clear: both;
 }
-.footer-div {
+.div-footer {
   float: left;
   width: 100%;
   overflow: hidden;
@@ -223,4 +227,17 @@ img.img-app-flow {
 /* AuthButton */
 .signout-btn {
   margin-left: 10px;
+}
+/* list item */
+.div-header li {
+  display: inline-block;
+}
+/* p */
+.p-error {
+  margin-top: 30px;
+  border: 2px solid #ec4c4c;
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #ec4c4c;
 }
