@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
@@ -8,22 +8,22 @@ import Button from "react-validation/build/button";
 import * as firebaseAuth from "../../../../services/firebaseAuth";
 
 // custom constants
-import * as routes from "../../../../constants/routes";
-import { INITIAL_STATE } from "../../../../views/App/views/SignUp/initialState";
+import * as ROUTES from "../../../../global/ROUTES";
+import INITIAL_STATE from "../../../../global/INITIAL_STATE";
 import ValidationType from "../../../../extensions/ValidationType";
 import { byPropKey } from "../../../../extensions/handling";
 
-const SignUpView = () => (
+const SignUpView = ({ history }) => (
   <div className="div-signup">
     <h2>Sign Up</h2>
-    <SignUpForm />
+    <SignUpForm history={history} />
   </div>
 );
 
 const SignUpLink = () => (
   <p>
     {" "}
-    Don't have an account? <Link to={routes.SIGN_UP}>Sign Up</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
 
@@ -37,12 +37,14 @@ class SignUpForm extends Component {
     event.preventDefault();
 
     const { username, email, password1 } = this.state;
+    const { history } = this.props;
 
     firebaseAuth
       .signIn(email, password1)
       .then(authUser => {
         debugger;
         this.setState(() => ({ ...INITIAL_STATE }));
+        history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState(byPropKey("error", error));
@@ -56,11 +58,11 @@ class SignUpForm extends Component {
           <label>
             Username*
             <Input
-              value={this.state.username}
               autoFocus
               placeholder="Your username"
               name="username"
               validations={[ValidationType.REQUIRED]}
+              value={this.state.username}
               onChange={event =>
                 this.setState(byPropKey("username", event.target.value))
               }
@@ -70,10 +72,10 @@ class SignUpForm extends Component {
           <label>
             Email*
             <Input
-              value={this.state.email}
               placeholder="Your email address"
               name="email"
               validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
+              value={this.state.email}
               onChange={event =>
                 this.setState(byPropKey("email", event.target.value))
               }
@@ -122,7 +124,7 @@ class SignUpForm extends Component {
               <div className="circle angled second" />
             </div>
 
-            <Link className="back" to={routes.HOME}>
+            <Link className="back" to={ROUTES.HOME}>
               Back
             </Link>
           </div>
@@ -136,5 +138,5 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpView;
+export default withRouter(SignUpView);
 export { SignUpForm, SignUpLink };

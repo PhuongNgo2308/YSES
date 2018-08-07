@@ -1,8 +1,7 @@
 // import firebase modules
 import firebase from "firebase";
 
-// import config setting
-import { config } from "../constants/config";
+import * as CONFIG from "../global/CONFIG";
 
 const devConfig = {
   apiKey: "AIzaSyAcIjJKAcSTQOk76vB6OxbQg19_LOcCBzM",
@@ -22,7 +21,7 @@ const prodConfig = {
   // messagingSenderId: "674513128733"
 };
 
-const env = config.env === "production" ? prodConfig : devConfig;
+const env = CONFIG.ENV === "production" ? prodConfig : devConfig;
 
 if (!firebase.apps.length) {
   firebase.initializeApp(env);

@@ -11,12 +11,12 @@ import AboutView from "../../views/App/views/Statics/AboutView";
 import HomeView from "../../views/App/views/Statics/HomeView";
 import NotFoundView from "../../views/App/views/Statics/NotFoundView";
 
-import SignInView from "../../views/App/views/Login/LoginView";
+import SignInView from "../../views/App/views/SignIn/SignInView";
 import SignUpView from "../../views/App/views/SignUp/SignUpView";
 import UserInfoView from "../../views/App/views/UserInfo/UserInfoView";
 
 import Navigation from "../../views/App/components/Navigation";
-import * as routes from "../../constants/routes";
+import * as ROUTES from "../../global/ROUTES";
 
 const NewApp = () => (
   <Router>
@@ -30,12 +30,13 @@ const NewApp = () => (
       <Fade>
         <div id="div-container" className="div-container">
           <Switch>
-            <Route exact path={routes.LANDING} component={HomeView} />
-            <Route exact path={routes.SIGN_IN} component={SignUpView} />
-            <Route exact path={routes.HOME} component={HomeView} />
-            <Route exact path={routes.ACCOUNT} component={UserInfoView} />
-            <Route exact path={routes.ABOUT} component={AboutView} />
-            <Route exact path={routes.PASSWORD_FORGET} component={HomeView} />
+            <Route exact path={ROUTES.LANDING} component={HomeView} />
+            <Route exact path={ROUTES.SIGN_IN} component={SignInView} />
+            <Route exact path={ROUTES.SIGN_UP} component={SignUpView} />
+            <Route exact path={ROUTES.HOME} component={HomeView} />
+            <Route exact path={ROUTES.ACCOUNT} component={UserInfoView} />
+            <Route exact path={ROUTES.ABOUT} component={AboutView} />
+            <Route exact path={ROUTES.FORGET_PWD} component={HomeView} />
 
             <Route component={NotFoundView} />
           </Switch>
@@ -51,4 +52,5 @@ const NewApp = () => (
     </div>
   </Router>
 );
+
 export default NewApp;
