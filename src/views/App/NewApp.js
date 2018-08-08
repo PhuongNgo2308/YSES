@@ -31,6 +31,7 @@ const NewApp = () => (
         <div id="div-container" className="div-container">
           <Switch>
             <Route exact path={ROUTES.LANDING} component={HomeView} />
+
             <Route exact path={ROUTES.SIGN_IN} component={SignInView} />
             <Route exact path={ROUTES.SIGN_UP} component={SignUpView} />
             <Route exact path={ROUTES.HOME} component={HomeView} />

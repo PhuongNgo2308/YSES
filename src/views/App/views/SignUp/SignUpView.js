@@ -1,3 +1,4 @@
+// third parties
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import Form from "react-validation/build/form";
@@ -7,17 +8,27 @@ import Button from "react-validation/build/button";
 // auth service
 import * as firebaseAuth from "../../../../services/firebaseAuth";
 
-// custom constants
+// custom
 import * as ROUTES from "../../../../global/ROUTES";
-import INITIAL_STATE from "../../../../global/INITIAL_STATE";
 import ValidationType from "../../../../extensions/ValidationType";
 import { byPropKey } from "../../../../extensions/handling";
+import AnimLayout from "../../../../views/App/AnimLayout";
+
+const INITIAL_STATE = {
+  username: "",
+  email: "",
+  password1: "",
+  password2: "",
+  error: null
+};
 
 const SignUpView = ({ history }) => (
-  <div className="div-signup">
-    <h2>Sign Up</h2>
-    <SignUpForm history={history} />
-  </div>
+  <AnimLayout>
+    <div className="div-signup">
+      <h2>Sign Up</h2>
+      <SignUpForm history={history} />
+    </div>
+  </AnimLayout>
 );
 
 const SignUpLink = () => (
@@ -40,9 +51,8 @@ class SignUpForm extends Component {
     const { history } = this.props;
 
     firebaseAuth
-      .signIn(email, password1)
+      .createUser(email, password1)
       .then(authUser => {
-        debugger;
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(ROUTES.HOME);
       })
