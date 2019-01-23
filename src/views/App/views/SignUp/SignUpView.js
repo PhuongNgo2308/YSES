@@ -129,10 +129,7 @@ class SignUpForm extends Component {
           </label>
 
           <div>
-            <div className="wrap">
-              <Button className="button clicker fast">Submit</Button>
-              <div className="circle angled second" />
-            </div>
+            <Button className="button">Submit</Button>
 
             <Link className="back" to={ROUTES.HOME}>
               Back

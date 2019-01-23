@@ -91,10 +91,7 @@ class SignInForm extends Component {
           </label>
 
           <div>
-            <div className="wrap">
-              <Button className="button clicker fast">Sign In</Button>
-              <div className="circle angled second" />
-            </div>
+            <Button className="button">Sign In</Button>
 
             <Link className="back" to={ROUTES.HOME}>
               Back
