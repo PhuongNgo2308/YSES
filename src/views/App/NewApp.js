@@ -11,10 +11,9 @@ import NotFoundView from "../../views/App/views/Statics/NotFoundView";
 
 import SignInView from "../../views/App/views/SignIn/SignInView";
 import SignUpView from "../../views/App/views/SignUp/SignUpView";
-import UserInfoView from "../../views/App/views/UserInfo/UserInfoView";
 
 import Navigation from "../../views/App/components/Navigation";
-import * as ROUTES from "../../global/ROUTES";
+import { ROUTES } from "../../global/ROUTES";
 
 const NewApp = () => (
   <Router>
@@ -25,13 +24,12 @@ const NewApp = () => (
 
       <div id="div-container" className="div-container">
         <Switch>
-          <Route exact path={ROUTES.LANDING} component={HomeView} />
+          <Route exact path={ROUTES.LANDING} component={AboutView} />
 
           <Route exact path={ROUTES.SIGN_IN} component={SignInView} />
           <Route exact path={ROUTES.SIGN_UP} component={SignUpView} />
-          <Route exact path={ROUTES.HOME} component={HomeView} />
-          <Route exact path={ROUTES.ACCOUNT} component={UserInfoView} />
-          <Route exact path={ROUTES.ABOUT} component={AboutView} />
+          <Route exact path={ROUTES.HOME} component={AboutView} />
+          <Route exact path={ROUTES.ABOUT} component={HomeView} />
           <Route exact path={ROUTES.FORGET_PWD} component={HomeView} />
 
           <Route component={NotFoundView} />

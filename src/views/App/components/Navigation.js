@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import * as ROUTES from "../../../global/ROUTES";
+import { ROUTES } from "../../../global/ROUTES";
 
 const Navigation = () => (
   <div id="div-nav">
@@ -13,7 +13,7 @@ const Navigation = () => (
         <Link to={ROUTES.SIGN_IN}>Sign in</Link>
       </li>
       <li>
-        <Link to={ROUTES.ACCOUNT}>About</Link>
+        <Link to={ROUTES.ABOUT}>About</Link>
       </li>
     </ul>
   </div>

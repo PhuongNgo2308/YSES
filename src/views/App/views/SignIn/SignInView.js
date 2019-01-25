@@ -12,7 +12,7 @@ import * as firebaseAuth from "../../../../services/firebaseAuth";
 import { byPropKey } from "../../../../extensions/handling";
 
 // custom constants
-import * as ROUTES from "../../../../global/ROUTES";
+import { ROUTES } from "../../../../global/ROUTES";
 import AnimLayout from "../../../../views/App/AnimLayout";
 import ValidationType from "../../../../extensions/ValidationType";
 import { SignUpLink } from "../SignUp/SignUpView";

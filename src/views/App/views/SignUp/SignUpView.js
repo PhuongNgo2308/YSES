@@ -9,7 +9,7 @@ import Button from "react-validation/build/button";
 import * as firebaseAuth from "../../../../services/firebaseAuth";
 
 // custom
-import * as ROUTES from "../../../../global/ROUTES";
+import { ROUTES } from "../../../../global/ROUTES";
 import ValidationType from "../../../../extensions/ValidationType";
 import { byPropKey } from "../../../../extensions/handling";
 import AnimLayout from "../../../../views/App/AnimLayout";
