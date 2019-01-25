@@ -241,3 +241,8 @@ img.img-app-flow {
   border-radius: 5px;
   color: #ec4c4c;
 }
+
+#div-actions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

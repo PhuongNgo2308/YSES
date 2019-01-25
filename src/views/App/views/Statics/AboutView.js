@@ -17,7 +17,8 @@ const INITIAL_STATE = {
   email: "",
   password: "",
   enckey: "",
-  error: null
+  error: null,
+  user: undefined
 };
 
 class GetDataForm extends Component {
@@ -35,95 +36,126 @@ class GetDataForm extends Component {
     firebaseAuth
       .signIn(email, password)
       .then(authUser => {
-        // this.setState(() => ({ ...INITIAL_STATE }));
+        this.setState(() => ({ ...INITIAL_STATE, user: authUser }));
 
         // get data based on enc key
-        debugger;
       })
       .catch(error => {
         this.setState(byPropKey("error", error));
       });
   };
 
-  fetchData = event => {
-    debugger;
-    const _state = this.state;
-  };
+  fetchData = event => {};
 
   updateKey = event => {};
 
+  logout = event => {
+    firebaseAuth.signOut();
+    this.setState(INITIAL_STATE);
+  };
+
   render() {
+    const isLoggedIn = this.state.user !== undefined;
+
     return (
       <div className="div-getdataform">
         <Form onSubmit={this.handleSubmit}>
           <div>
-            <Button className="button">Login</Button>
+            {isLoggedIn ? (
+              <div>
+                <span>
+                  Welcome, {this.state.user.email}
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={this.logout}
+                  >
+                    Log out
+                  </button>
+                </span>
 
-            <button type="button" className="button" onClick={this.fetchData}>
-              Fetch Data
-            </button>
+                <div id="div-actions">
+                  <label>
+                    <Input
+                      placeholder="Your encryption key"
+                      name="enckey"
+                      minLength="5"
+                      // validations={[ValidationType.REQUIRED, ValidationType.GT]}
+                      value={this.state.enckey}
+                      onChange={event =>
+                        this.setState(byPropKey("enckey", event.target.value))
+                      }
+                    />
+                  </label>
 
-            <button type="button" className="button" onClick={this.updateKey}>
-              Update key
-            </button>
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={this.fetchData}
+                  >
+                    Fetch Data
+                  </button>
 
-            <Link className="back" to={ROUTES.HOME}>
-              Back
-            </Link>
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={this.updateKey}
+                  >
+                    Update key
+                  </button>
+                </div>
+
+                <textarea />
+              </div>
+            ) : (
+              <div>
+                <Button className="button">Login</Button>
+
+                <br />
+                <br />
+
+                <label>
+                  <Input
+                    autoFocus
+                    placeholder="Your email address"
+                    name="email"
+                    validations={[
+                      ValidationType.REQUIRED,
+                      ValidationType.EMAIL
+                    ]}
+                    value={this.state.email}
+                    onChange={event =>
+                      this.setState(byPropKey("email", event.target.value))
+                    }
+                  />
+                </label>
+
+                <label>
+                  <Input
+                    placeholder="Your password"
+                    type="password"
+                    name="password"
+                    minLength="8"
+                    validations={[ValidationType.REQUIRED, ValidationType.GT]}
+                    value={this.state.password}
+                    onChange={event =>
+                      this.setState(byPropKey("password", event.target.value))
+                    }
+                  />
+                </label>
+              </div>
+            )}
+
+            {this.state.error && (
+              <p className="p-error">{this.state.error.message}</p>
+            )}
           </div>
 
           <br />
 
-          <label>
-            Email (*)
-            <Input
-              autoFocus
-              placeholder="Your email address"
-              name="email"
-              validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
-              value={this.state.email}
-              onChange={event =>
-                this.setState(byPropKey("email", event.target.value))
-              }
-            />
-          </label>
-
-          <label>
-            Password (*)
-            <Input
-              placeholder="Your password"
-              type="password"
-              name="password"
-              minLength="8"
-              validations={[ValidationType.REQUIRED, ValidationType.GT]}
-              value={this.state.password}
-              onChange={event =>
-                this.setState(byPropKey("password", event.target.value))
-              }
-            />
-          </label>
-
-          <label>
-            Encyption key (*)
-            <Input
-              placeholder="Your encryption key"
-              name="enckey"
-              minLength="5"
-              // validations={[ValidationType.REQUIRED, ValidationType.GT]}
-              value={this.state.enckey}
-              onChange={event =>
-                this.setState(byPropKey("enckey", event.target.value))
-              }
-            />
-          </label>
-
-          <textarea />
-
-          <br />
-
-          {this.state.error && (
-            <p className="p-error">{this.state.error.message}</p>
-          )}
+          <Link className="back" to={ROUTES.HOME}>
+            Back
+          </Link>
         </Form>
       </div>
     );
@@ -133,7 +165,7 @@ class GetDataForm extends Component {
 const AboutView = ({ history }) => (
   <AnimLayout>
     <div className="about-div">
-      <h2>About Us</h2>
+      <h2>YSES Demo</h2>
       <GetDataForm history={history} />
     </div>
   </AnimLayout>

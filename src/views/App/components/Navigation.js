@@ -10,7 +10,7 @@ const Navigation = () => (
         <Link to={ROUTES.HOME}>Home</Link>
       </li>
       <li>
-        <Link to={ROUTES.SIGN_IN}>Sign in</Link>
+        <Link to={ROUTES.SIGN_IN} />
       </li>
       <li>
         <Link to={ROUTES.ABOUT}>About</Link>
