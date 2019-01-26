@@ -4,9 +4,11 @@ import { Link, withRouter } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
+import Textarea from "react-validation/build/textarea";
+import CryptoJS from "react-native-crypto-js";
 
 // auth service
-import * as firebaseAuth from "../../../../services/firebaseAuth";
+import FB from "../../../../services/services.firebase";
 
 // custom functions
 import { ROUTES } from "../../../../global/ROUTES";
@@ -18,8 +20,20 @@ const INITIAL_STATE = {
   password: "",
   enckey: "",
   error: null,
+  orgdata: "",
+  decdata: "",
+  encdata: "",
   user: undefined
 };
+
+const AboutView = ({ history }) => (
+  <AnimLayout>
+    <div className="about-div">
+      <h2>YSES - Your Secrets Encryption Service</h2>
+      <GetDataForm history={history} />
+    </div>
+  </AnimLayout>
+);
 
 class GetDataForm extends Component {
   constructor(props) {
@@ -27,148 +41,246 @@ class GetDataForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  handleSubmit = event => {
+  doLogin = event => {
     event.preventDefault();
 
-    const { email, password, enckey } = this.state;
+    const { email, password } = this.state;
     const { history } = this.props;
 
-    firebaseAuth
-      .signIn(email, password)
+    FB.SignIn(email, password)
       .then(authUser => {
         this.setState(() => ({ ...INITIAL_STATE, user: authUser }));
-
-        // get data based on enc key
       })
       .catch(error => {
         this.setState(byPropKey("error", error));
       });
   };
 
-  fetchData = event => {};
+  fetchData = event => {
+    const { enckey, user } = this.state;
+
+    let _this = this;
+    this.setState({
+      ...this.state,
+      encdata: "",
+      decdata: "",
+      error: null
+    });
+
+    const ref = FB.Database.collection("userEncryptedData").doc(user.uid);
+
+    ref.get().then(doc => {
+      if (doc.exists) {
+        let docData = doc.data();
+
+        // Decrypt
+        let decText = CryptoJS.AES.decrypt(
+          docData.encyptedData,
+          enckey
+        ).toString(CryptoJS.enc.Utf8);
+
+        if (decText.length === 0) {
+          _this.setState(
+            byPropKey("error", { message: "You entered the WRONG KEY." })
+          );
+          return;
+        }
+
+        _this.setState({
+          ..._this.state,
+          decdata: decText,
+          encdata: docData.encyptedData
+        });
+      } else {
+        _this.setState(
+          byPropKey("error", { message: "No encrypted data FOUND." })
+        );
+      }
+    });
+  };
+
+  saveData = event => {
+    const { enckey, orgdata, user } = this.state;
+
+    this.setState({
+      ...this.state,
+      error: null
+    });
+
+    // Encrypt
+    let encryptedData = CryptoJS.AES.encrypt(orgdata, enckey).toString();
+
+    FB.Database.collection("userEncryptedData")
+      .doc(user.uid)
+      .set({
+        encyptedData: encryptedData
+      })
+      .then(docRef => {
+        alert("Your data is encrypted and saved SUCCESSFULLY.");
+      })
+      .catch(error => {
+        this.setState(byPropKey("error", error));
+      });
+
+    this.setState({
+      ...this.state,
+      encdata: encryptedData
+    });
+  };
 
   updateKey = event => {};
 
   logout = event => {
-    firebaseAuth.signOut();
+    FB.SignOut();
     this.setState(INITIAL_STATE);
   };
 
   render() {
     const isLoggedIn = this.state.user !== undefined;
+    const validEncKey = this.state.enckey && this.state.enckey.length >= 5;
+    const validOrgData = this.state.orgdata && this.state.orgdata.length >= 10;
+    const canSaveEncryptedData = validEncKey && validOrgData;
 
     return (
-      <div className="div-getdataform">
-        <Form onSubmit={this.handleSubmit}>
-          <div>
-            {isLoggedIn ? (
-              <div>
-                <span>
-                  Welcome, {this.state.user.email}
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={this.logout}
-                  >
-                    Log out
-                  </button>
-                </span>
+      <Form onSubmit={this.doLogin}>
+        <div>
+          {isLoggedIn ? (
+            // AUTHENTIC section
+            <div>
+              <span>
+                Welcome,{" "}
+                {this.state.user !== undefined
+                  ? this.state.user.email
+                  : "Guest "}
+                <button type="button" className="button" onClick={this.logout}>
+                  Log out
+                </button>
+              </span>
 
-                <div id="div-actions">
-                  <label>
-                    <Input
-                      placeholder="Your encryption key"
-                      name="enckey"
-                      minLength="5"
-                      // validations={[ValidationType.REQUIRED, ValidationType.GT]}
-                      value={this.state.enckey}
-                      onChange={event =>
-                        this.setState(byPropKey("enckey", event.target.value))
-                      }
-                    />
-                  </label>
-
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={this.fetchData}
-                  >
-                    Fetch Data
-                  </button>
-
-                  <button
-                    type="button"
-                    className="button"
-                    onClick={this.updateKey}
-                  >
-                    Update key
-                  </button>
-                </div>
-
-                <textarea />
-              </div>
-            ) : (
-              <div>
-                <Button className="button">Login</Button>
-
-                <br />
-                <br />
-
+              <div id="div-actions">
                 <label>
                   <Input
-                    autoFocus
-                    placeholder="Your email address"
-                    name="email"
-                    validations={[
-                      ValidationType.REQUIRED,
-                      ValidationType.EMAIL
-                    ]}
-                    value={this.state.email}
+                    placeholder="Your encryption key"
+                    name="enckey"
+                    value={this.state.enckey}
                     onChange={event =>
-                      this.setState(byPropKey("email", event.target.value))
+                      this.setState(byPropKey("enckey", event.target.value))
                     }
+                    minLength="5"
+                    validations={[ValidationType.GT]}
                   />
                 </label>
 
-                <label>
-                  <Input
-                    placeholder="Your password"
-                    type="password"
-                    name="password"
-                    minLength="8"
-                    validations={[ValidationType.REQUIRED, ValidationType.GT]}
-                    value={this.state.password}
-                    onChange={event =>
-                      this.setState(byPropKey("password", event.target.value))
-                    }
+                <button
+                  type="button"
+                  className="button"
+                  onClick={this.fetchData}
+                  disabled={!validEncKey}
+                >
+                  Fetch Data
+                </button>
+
+                <button
+                  type="button"
+                  className="button"
+                  onClick={this.saveData}
+                  disabled={!canSaveEncryptedData}
+                >
+                  Save Data
+                </button>
+              </div>
+
+              <label htmlFor="orgdata">
+                Your private data:
+                <br />
+                <Textarea
+                  name="decdata"
+                  value={this.state.orgdata}
+                  minLength="10"
+                  validations={[ValidationType.GT]}
+                  onChange={event =>
+                    this.setState(byPropKey("orgdata", event.target.value))
+                  }
+                  spellcheck="false"
+                />
+              </label>
+
+              <br />
+
+              {this.state.decdata && (
+                <label htmlFor="decdata">
+                  Decrypted data:
+                  <br />
+                  <Textarea
+                    name="decdata"
+                    value={this.state.decdata}
+                    readOnly
                   />
                 </label>
-              </div>
-            )}
+              )}
 
-            {this.state.error && (
-              <p className="p-error">{this.state.error.message}</p>
-            )}
-          </div>
+              {this.state.encdata && (
+                <label htmlFor="encdata">
+                  Encrypted data:
+                  <br />
+                  <Textarea
+                    name="encdata"
+                    value={this.state.encdata}
+                    readOnly
+                  />
+                </label>
+              )}
+            </div>
+          ) : (
+            // GUEST section
+            <div>
+              <Button className="button">Login</Button>
 
-          <br />
+              <br />
+              <br />
 
-          <Link className="back" to={ROUTES.HOME}>
-            Back
-          </Link>
-        </Form>
-      </div>
+              <label>
+                <Input
+                  autoFocus
+                  placeholder="Your email address"
+                  name="email"
+                  validations={[ValidationType.REQUIRED, ValidationType.EMAIL]}
+                  value={this.state.email}
+                  onChange={event =>
+                    this.setState(byPropKey("email", event.target.value))
+                  }
+                />
+              </label>
+
+              <label>
+                <Input
+                  placeholder="Your password"
+                  type="password"
+                  name="password"
+                  minLength="8"
+                  validations={[ValidationType.REQUIRED, ValidationType.GT]}
+                  value={this.state.password}
+                  onChange={event =>
+                    this.setState(byPropKey("password", event.target.value))
+                  }
+                />
+              </label>
+            </div>
+          )}
+
+          {this.state.error && (
+            <p className="p-error">{this.state.error.message}</p>
+          )}
+        </div>
+
+        <br />
+
+        <Link className="back" to={ROUTES.HOME}>
+          Back
+        </Link>
+      </Form>
     );
   }
 }
-
-const AboutView = ({ history }) => (
-  <AnimLayout>
-    <div className="about-div">
-      <h2>YSES Demo</h2>
-      <GetDataForm history={history} />
-    </div>
-  </AnimLayout>
-);
 
 export default AboutView;

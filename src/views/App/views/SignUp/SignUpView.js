@@ -6,7 +6,7 @@ import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
 
 // auth service
-import * as firebaseAuth from "../../../../services/firebaseAuth";
+import FB from "../../../../services/services.firebase";
 
 // custom
 import { ROUTES } from "../../../../global/ROUTES";
@@ -50,8 +50,7 @@ class SignUpForm extends Component {
     const { username, email, password1 } = this.state;
     const { history } = this.props;
 
-    firebaseAuth
-      .createUser(email, password1)
+    FB.CreateUser(email, password1)
       .then(authUser => {
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(ROUTES.HOME);

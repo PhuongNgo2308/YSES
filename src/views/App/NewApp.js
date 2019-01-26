@@ -9,7 +9,6 @@ import AboutView from "../../views/App/views/Statics/AboutView";
 import HomeView from "../../views/App/views/Statics/HomeView";
 import NotFoundView from "../../views/App/views/Statics/NotFoundView";
 
-import SignInView from "../../views/App/views/SignIn/SignInView";
 import SignUpView from "../../views/App/views/SignUp/SignUpView";
 
 import Navigation from "../../views/App/components/Navigation";
@@ -26,7 +25,6 @@ const NewApp = () => (
         <Switch>
           <Route exact path={ROUTES.LANDING} component={AboutView} />
 
-          <Route exact path={ROUTES.SIGN_IN} component={SignInView} />
           <Route exact path={ROUTES.SIGN_UP} component={SignUpView} />
           <Route exact path={ROUTES.HOME} component={AboutView} />
           <Route exact path={ROUTES.ABOUT} component={HomeView} />

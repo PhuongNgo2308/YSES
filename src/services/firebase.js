@@ -1,7 +1,8 @@
 // import firebase modules
 import firebase from "firebase";
+import "firebase/firestore";
 
-import * as CONFIG from "../global/CONFIG";
+import { ENV } from "../global/CONFIG";
 
 const devConfig = {
   apiKey: "AIzaSyAcIjJKAcSTQOk76vB6OxbQg19_LOcCBzM",
@@ -21,12 +22,12 @@ const prodConfig = {
   // messagingSenderId: "674513128733"
 };
 
-const env = CONFIG.ENV === "production" ? prodConfig : devConfig;
+const settings = { timestampsInSnapshots: true };
+const env = ENV === "production" ? prodConfig : devConfig;
 
 if (!firebase.apps.length) {
   firebase.initializeApp(env);
+  firebase.firestore();
 }
 
-const auth = firebase.auth();
-
-export { auth };
+export default firebase;

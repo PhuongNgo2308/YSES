@@ -246,3 +246,12 @@ img.img-app-flow {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+textarea {
+  display: block;
+  min-width: 70vw;
+  min-height: 150px;
+}
+button {
+  margin-right: 15px;
+}
