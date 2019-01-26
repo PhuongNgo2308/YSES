@@ -65,86 +65,39 @@ a:hover::before {
 }
 
 /* button */
-.wrap {
+button {
   display: inline-block;
-  margin-right: 30px;
-  position: relative;
-  width: 80px;
-  height: 46px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.clicker {
-  background-color: white;
-  outline: none;
-  font-weight: 600;
-  position: absolute;
-  cursor: pointer;
-  padding: 0;
-  border: none;
-  height: 64px;
-  width: 64px;
-  left: 8px;
-  top: 8px;
-  border-radius: 100px;
-  z-index: 2;
+  padding: 0.6em 1.2em;
+  border: 2px solid #1f8e04;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
   color: #1f8e04;
+  text-align: center;
+  transition: all 0.2s;
+  background: transparent;
+  outline: none;
+}
+button:hover:enabled {
+  color: white;
+  background-color: #1f8e04;
+  cursor: pointer;
 }
 
-.clicker:disabled {
-  color: #c5c5c5;
-  font-weight: 500;
+button:disabled,
+button[disabled] {
+  background-color: white;
+  color: #ccc;
 }
 
-.clicker:active {
-  transform: translate(0, 1px);
-  height: 63px;
-  box-shadow: 0px 1px 0 0 rgb(190, 190, 190) inset;
-}
-
-.circle {
-  position: relative;
-  border-radius: 40px;
-  width: 80px;
-  height: 80px;
-  z-index: 1;
-}
-
-.clicker.fast:hover + .circle,
-.clicker.fast:active + .circle {
-  animation: rotator linear 0.6s infinite;
-}
-
-@keyframes rotator {
-  from {
-    transform: rotate(0deg);
+@media all and (max-width: 30em) {
+   .button1 {
+    display: block;
+    margin: 0.4em auto;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.angled.second {
-  background-image: linear-gradient(
-    white 0%,
-    white 30%,
-    #1f8e04 30%,
-    #1f8e04 70%,
-    white 70%,
-    white 100%
-  );
-}
-.angled.second.cancel {
-  background-image: linear-gradient(
-    white 0%,
-    white 30%,
-    #f94f0e 30%,
-    #f94f0e 70%,
-    white 70%,
-    white 100%
-  );
 }
 /* input */
 input {
@@ -248,10 +201,26 @@ img.img-app-flow {
 }
 
 textarea {
-  display: block;
-  min-width: 70vw;
-  min-height: 150px;
+  margin-top: 10px !important;
+  min-height: 200px;
+  max-width: 600px;
+  color: #999;
+  font-size: 13px;
+  font-family: "Ubuntu", Helvetica, Arial, sans-serif;
+  width: 100%;
+  background: #fff;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  -webkit-transition: height 2s ease;
+  -moz-transition: height 2s ease;
+  -ms-transition: height 2s ease;
+  -o-transition: height 2s ease;
+  transition: height 2s ease;
 }
-button {
-  margin-right: 15px;
+
+label {
+  display: block;
+  margin-top: 10px;
 }

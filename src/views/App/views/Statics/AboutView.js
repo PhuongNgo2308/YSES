@@ -136,6 +136,7 @@ class GetDataForm extends Component {
   };
 
   render() {
+    //const isLoggedIn = true;
     const isLoggedIn = this.state.user !== undefined;
     const validEncKey = this.state.enckey && this.state.enckey.length >= 5;
     const validOrgData = this.state.orgdata && this.state.orgdata.length >= 10;
@@ -150,7 +151,7 @@ class GetDataForm extends Component {
               <span>
                 Welcome,{" "}
                 {this.state.user !== undefined
-                  ? this.state.user.email
+                  ? this.state.user.email + " "
                   : "Guest "}
                 <button type="button" className="button" onClick={this.logout}>
                   Log out
@@ -201,11 +202,9 @@ class GetDataForm extends Component {
                   onChange={event =>
                     this.setState(byPropKey("orgdata", event.target.value))
                   }
-                  spellcheck="false"
+                  spellCheck="false"
                 />
               </label>
-
-              <br />
 
               {this.state.decdata && (
                 <label htmlFor="decdata">
@@ -234,7 +233,7 @@ class GetDataForm extends Component {
           ) : (
             // GUEST section
             <div>
-              <Button className="button">Login</Button>
+              <Button className="button button1">Login</Button>
 
               <br />
               <br />
