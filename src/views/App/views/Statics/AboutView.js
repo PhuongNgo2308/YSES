@@ -5,7 +5,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Button from "react-validation/build/button";
 import Textarea from "react-validation/build/textarea";
-import CryptoJS from "react-native-crypto-js";
+import CryptoJS from "crypto-js";
 
 // auth service
 import FB from "../../../../services/services.firebase";
